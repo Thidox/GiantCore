@@ -15,7 +15,7 @@ import java.util.HashMap;
 public class GiantCore extends JavaPlugin {
 	
 	private static GiantCore instance;
-	private double protocolVersion = 0.1;
+	private double protocolVersion = 0.2;
 	private HashMap<PermHandler.Engines, HashMap<Boolean, PermHandler>> permHandler = new HashMap<PermHandler.Engines, HashMap<Boolean, PermHandler>>();
 	private HashMap<Plugin, Database> dbList = new HashMap<Plugin, Database>();
 	//private Messages msgHandler;
