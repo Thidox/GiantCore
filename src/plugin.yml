@@ -1,4 +1,0 @@
-name: $name
-main: nl.giantit.minecraft.$package.$name
-version: $version-$build
-authors: [Giant]
