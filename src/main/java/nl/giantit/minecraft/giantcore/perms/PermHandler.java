@@ -16,8 +16,8 @@ public class PermHandler {
 		SPERM("SPERM", "Bukkit Superperms"),
 		NOPERM("NOPERM", "No Permissions");
 		
-		private String internal;
-		private String name;
+		private final String internal;
+		private final String name;
 		
 		private Engines(String internal, String s) {
 			this.internal = internal;
