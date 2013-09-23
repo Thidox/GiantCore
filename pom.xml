@@ -90,6 +90,14 @@
 									<exclude>de*</exclude>
 									<exclude>ru*</exclude>
 									<exclude>sql</exclude>
+									<exclude>boardinggamer*</exclude>
+									<exclude>ca*</exclude>
+									<exclude>com.ea*</exclude>
+									<exlude>com.iCo*</exlude>
+									<exlude>com.niji*</exlude>
+									<exlude>cosine*</exlude>
+									<exlude>is*</exlude>
+									<exlude>me*</exlude>
 								</excludes>
 							</artifactSet>
 							<relocations>
