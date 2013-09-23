@@ -1,6 +1,7 @@
 package nl.giantit.minecraft.giantcore;
 
 import nl.giantit.minecraft.giantcore.Database.Database;
+import nl.giantit.minecraft.giantcore.core.Eco.Eco;
 import nl.giantit.minecraft.giantcore.perms.PermHandler;
 
 import org.bukkit.plugin.Plugin;
@@ -15,9 +16,10 @@ import java.util.HashMap;
 public class GiantCore extends JavaPlugin {
 	
 	private static GiantCore instance;
-	private double protocolVersion = 0.2;
-	private HashMap<PermHandler.Engines, HashMap<Boolean, PermHandler>> permHandler = new HashMap<PermHandler.Engines, HashMap<Boolean, PermHandler>>();
-	private HashMap<Plugin, Database> dbList = new HashMap<Plugin, Database>();
+	private final double protocolVersion = 0.2;
+	private final HashMap<PermHandler.Engines, HashMap<Boolean, PermHandler>> permHandler = new HashMap<PermHandler.Engines, HashMap<Boolean, PermHandler>>();
+	private final HashMap<Eco.Engines, Eco> ecoHandler = new HashMap<Eco.Engines, Eco>();
+	private final HashMap<Plugin, Database> dbList = new HashMap<Plugin, Database>();
 	//private Messages msgHandler;
 	
 	private void setInstance() {
@@ -86,6 +88,17 @@ public class GiantCore extends JavaPlugin {
 		this.permHandler.put(permEngine, handlers);
 		
 		return pH;
+	}
+	
+	public Eco getEcoHandler(Eco.Engines ecoEngine) {
+		if(this.ecoHandler.containsKey(ecoEngine)) {
+			return this.ecoHandler.get(ecoEngine);
+		}
+		
+		Eco eH = new Eco(this, ecoEngine);
+		this.ecoHandler.put(ecoEngine, eH);
+		
+		return eH;
 	}
 	
 	public static GiantCore getInstance() {
