@@ -8,12 +8,31 @@
 	<packaging>jar</packaging>
 
 	<name>GiantCore</name>
+	<url>http://giantcore.minecraft.giantit.nl</url>
 	
-	<scm>
+    <ciManagement>
+        <system>hudson</system>
+        <url>http://jenkins.giantit.nl/job/GiantCore/</url>
+    </ciManagement>
+	
+    <scm>
 		<developerConnection>scm:git:git@github.com:Thidox/GiantCore.git</developerConnection>
-		<connection>scm:git:git://github.com/Thidox/GiantCore.git</connection>
+		<connection>scm:git:git://git@github.com/Thidox/GiantCore.git</connection>
 		<url>https://github.com/Thidox/Giantcore/tree/master</url>
 	</scm>
+	
+	<distributionManagement>
+		<repository>
+			<id>deployment</id>
+			<name>Internal Releases</name>
+			<url>http://nexus.giantit.nl/content/repositories/releases/</url>
+		</repository>
+		<snapshotRepository>
+			<id>deployment</id>
+			<name>Internal Snapshots</name>
+			<url>http://nexus.giantit.nl/content/repositories/snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,6 +46,10 @@
 		<repository>
 			<id>bukkit-repo</id>
 			<url>http://repo.bukkit.org/content/groups/public/</url>
+		</repository>
+		<repository>
+			<id>nexusThirdParty</id>
+			<url>http://nexus.giantit.nl/content/repositories/thirdparty/</url>
 		</repository>
 	</repositories>
 
@@ -55,7 +78,7 @@
 				<version>1.2</version>
 				<executions>
 					<execution>
-						<phase>prepare-package</phase>
+						<phase>generate-resources</phase>
 						<goals>
 							<goal>create</goal>
 						</goals>
@@ -120,7 +143,7 @@
 						<index>true</index>
 						<manifestEntries>
 							<Built-By>A Sheep</Built-By>
-							<Implementation-Build>${buildNumber}</Implementation-Build>
+							<Implementation-Build>${version}-${buildNumber}</Implementation-Build>
 						</manifestEntries>
 					</archive>
 				</configuration>
