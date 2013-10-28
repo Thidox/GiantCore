@@ -51,6 +51,10 @@
 			<id>nexusThirdParty</id>
 			<url>http://nexus.giantit.nl/content/repositories/thirdparty/</url>
 		</repository>
+		<repository>
+			<id>ZPermRepo</id>
+			<url>http://maven.tyrannyofheaven.org</url>
+		</repository>
 	</repositories>
 
 	<build>
@@ -183,8 +187,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.tyrannyofheaven.bukkit</groupId>
-			<artifactId>zpermissions</artifactId>
-			<version>0.9.9</version>
+			<artifactId>zPermissions</artifactId>
+			<version>1.1-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
