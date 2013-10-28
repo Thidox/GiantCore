@@ -101,7 +101,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
-				<version>1.4</version>
+				<version>2.1</version>
 				<executions>
 					<execution>
 						<phase>package</phase>
@@ -110,22 +110,9 @@
 						</goals>
 						<configuration>
 							<artifactSet>
-								<excludes>
-									<exclude>com.google.common*</exclude>
-									<exclude>com.avaje*</exclude>
-									<exclude>org*</exclude>
-									<exclude>de*</exclude>
-									<exclude>ru*</exclude>
-									<exclude>sql</exclude>
-									<exclude>boardinggamer*</exclude>
-									<exclude>ca*</exclude>
-									<exclude>com.ea*</exclude>
-									<exlude>com.iCo*</exlude>
-									<exlude>com.niji*</exlude>
-									<exlude>cosine*</exlude>
-									<exlude>is*</exlude>
-									<exlude>me*</exlude>
-								</excludes>
+								<includes>
+									<include>com.google.code.gson</include>
+								</includes>
 							</artifactSet>
 							<relocations>
 								<relocation>
