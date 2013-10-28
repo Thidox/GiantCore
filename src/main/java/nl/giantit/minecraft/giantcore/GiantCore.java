@@ -27,7 +27,7 @@ public class GiantCore extends JavaPlugin {
 	private final HashMap<Eco.Engines, Eco> ecoHandler = new HashMap<Eco.Engines, Eco>();
 	private final HashMap<Plugin, Database> dbList = new HashMap<Plugin, Database>();
 	private Items itemHandler;
-	//private Messages msgHandler;
+	
 	private String dir;
 	
 	private void setInstance() {
@@ -40,7 +40,7 @@ public class GiantCore extends JavaPlugin {
 	
 	@Override
 	public void onEnable() {
-		//this.permHandler = new PermHandler(this, "", true);
+		
 		if(!getDataFolder().exists()) {
 			getDataFolder().mkdir();
 			getDataFolder().setWritable(true);
