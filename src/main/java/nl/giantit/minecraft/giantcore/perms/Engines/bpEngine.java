@@ -152,6 +152,51 @@ public class bpEngine implements Permission {
 	}
 	
 	@Override
+	public void setPrefix(Player p, String prefix) {
+		this.setPrefix(p.getName(), prefix, p.getWorld().getName());
+	}
+	
+	@Override
+	public void setPrefix(String p, String prefix, String world) {
+		plugin.getLogger().log(Level.WARNING, "bPermissions does not support player prefixes!");
+	}
+	
+	@Override
+	public void setPrefix(Player p, String prefix, String world) {
+		this.setPrefix(p.getName(), prefix, world);
+	}
+	
+	@Override
+	public String getPrefix(Player p) {
+		return this.getPrefix(p.getName(), p.getWorld().getName());
+	}
+	
+	@Override
+	public String getPrefix(String p, String world) {
+		return "";
+	}
+	
+	@Override
+	public String getPrefix(Player p, String world) {
+		return this.getPrefix(p.getName(), world);
+	}
+	
+	@Override
+	public String getGroupPrefix(Player p) {
+		return this.getGroupPrefix(p, p.getWorld().getName());
+	}
+	
+	@Override
+	public String getGroupPrefix(Player p, String world) {
+		return this.getGroupPrefix(p.getName(), this.getGroup(p), world);
+	}
+
+	@Override
+	public String getGroupPrefix(String p, String g, String world) {
+		return "";
+	}
+	
+	@Override
 	public boolean isEnabled() {
 		return permission;
 	}

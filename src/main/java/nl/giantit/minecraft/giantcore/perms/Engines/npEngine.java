@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 
 import java.util.logging.Level;
 
+
 public class npEngine implements Permission {
 
 	private GiantCore plugin;
@@ -126,6 +127,59 @@ public class npEngine implements Permission {
 	@Override
 	public String[] getGroups(Player p, String world) {
 		return this.getGroups(p.getName(), world);
+	}
+	
+	@Override
+	public void setPrefix(Player p, String prefix) {
+		this.setPrefix(p, prefix, p.getWorld().getName());
+	}
+	
+	@Override
+	public void setPrefix(String p, String prefix, String world) {
+		Player pl = plugin.getServer().getPlayer(p);
+		if(pl != null) {
+			this.setPrefix(pl, prefix, world);
+		}
+	}
+	
+	@Override
+	public void setPrefix(Player p, String prefix, String world) {
+		p.setDisplayName(prefix + p.getName());
+	}
+	
+	@Override
+	public String getPrefix(Player p) {
+		return p.getDisplayName().substring(0, p.getDisplayName().length() - p.getName().length());
+	}
+	
+	@Override
+	public String getPrefix(String p, String world) {
+		Player pl = plugin.getServer().getPlayer(p);
+		if(pl != null) {
+			return this.getPrefix(pl, world);
+		}
+		
+		return "";
+	}
+	
+	@Override
+	public String getPrefix(Player p, String world) {
+		return this.getPrefix(p.getName(), world);
+	}
+	
+	@Override
+	public String getGroupPrefix(Player p) {
+		return this.getGroupPrefix(p, p.getWorld().getName());
+	}
+	
+	@Override
+	public String getGroupPrefix(Player p, String world) {
+		return this.getGroupPrefix(p.getName(), this.getGroup(p), world);
+	}
+
+	@Override
+	public String getGroupPrefix(String p, String g, String world) {
+		return "";
 	}
 	
 	@Override

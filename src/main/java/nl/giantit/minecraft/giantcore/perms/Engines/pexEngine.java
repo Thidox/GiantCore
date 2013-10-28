@@ -72,7 +72,7 @@ public class pexEngine implements Permission {
 
 	@Override
 	public boolean groupHasPerm(String group, String perm) {
-		PermissionGroup g = permission.getPermissionManager().getGroup(group);
+		PermissionGroup g = PermissionsEx.getPermissionManager().getGroup(group);
 		if(g != null)
 			return g.has(perm);
 		
@@ -81,7 +81,7 @@ public class pexEngine implements Permission {
 
 	@Override
 	public boolean groupHasPerm(String group, String perm, String world) {
-		PermissionGroup g = permission.getPermissionManager().getGroup(group);
+		PermissionGroup g = PermissionsEx.getPermissionManager().getGroup(group);
 		if(g != null)
 			return g.has(perm, world);
 		
@@ -90,7 +90,7 @@ public class pexEngine implements Permission {
 
 	@Override
 	public boolean inGroup(String p, String group) {
-		return permission.getPermissionManager().getUser(p).inGroup(group);
+		return PermissionsEx.getPermissionManager().getUser(p).inGroup(group);
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class pexEngine implements Permission {
 	
 	@Override
 	public boolean inGroup(String p, String group, String world) {
-		return permission.getPermissionManager().getUser(p).inGroup(group, world);
+		return PermissionsEx.getPermissionManager().getUser(p).inGroup(group, world);
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public class pexEngine implements Permission {
 
 	@Override
 	public String getGroup(String p) {
-		String[] groups = permission.getPermissionManager().getUser(p).getGroupsNames();
+		String[] groups = PermissionsEx.getPermissionManager().getUser(p).getGroupsNames();
 		if(groups.length > 0)
 			return groups[0];
 		
@@ -124,7 +124,7 @@ public class pexEngine implements Permission {
 
 	@Override
 	public String getGroup(String p, String world) {
-		String[] groups = permission.getPermissionManager().getUser(p).getGroupsNames(world);
+		String[] groups = PermissionsEx.getPermissionManager().getUser(p).getGroupsNames(world);
 		if(groups.length > 0)
 			return groups[0];
 		
@@ -138,7 +138,7 @@ public class pexEngine implements Permission {
 
 	@Override
 	public String[] getGroups(String p) {
-		return permission.getPermissionManager().getUser(p).getGroupsNames();
+		return PermissionsEx.getPermissionManager().getUser(p).getGroupsNames();
 	}
 
 	@Override
@@ -148,12 +148,57 @@ public class pexEngine implements Permission {
 
 	@Override
 	public String[] getGroups(String p, String world) {
-		return permission.getPermissionManager().getUser(p).getGroupsNames(world);
+		return PermissionsEx.getPermissionManager().getUser(p).getGroupsNames(world);
 	}
 
 	@Override
 	public String[] getGroups(Player p, String world) {
 		return this.getGroups(p.getName(), world);
+	}
+	
+	@Override
+	public void setPrefix(Player p, String prefix) {
+		this.setPrefix(p.getName(), prefix, p.getWorld().getName());
+	}
+	
+	@Override
+	public void setPrefix(String p, String prefix, String world) {
+		PermissionsEx.getPermissionManager().getUser(p).setPrefix(prefix, world);
+	}
+	
+	@Override
+	public void setPrefix(Player p, String prefix, String world) {
+		this.setPrefix(p.getName(), prefix, world);
+	}
+	
+	@Override
+	public String getPrefix(Player p) {
+		return this.getPrefix(p.getName(), p.getWorld().getName());
+	}
+	
+	@Override
+	public String getPrefix(String p, String world) {
+		return PermissionsEx.getPermissionManager().getUser(p).getPrefix(world);
+	}
+	
+	@Override
+	public String getPrefix(Player p, String world) {
+		return this.getPrefix(p.getName(), world);
+	}
+	
+	@Override
+	public String getGroupPrefix(Player p) {
+		return this.getGroupPrefix(p, p.getWorld().getName());
+	}
+	
+	@Override
+	public String getGroupPrefix(Player p, String world) {
+		return this.getGroupPrefix(p.getName(), this.getGroup(p), world);
+	}
+	
+	@Override
+	public String getGroupPrefix(String p, String g, String world) {
+		return PermissionsEx.getPermissionManager().getGroup(g).getPrefix(world);
 	}
 	
 	@Override

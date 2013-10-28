@@ -27,5 +27,17 @@ public interface Permission {
 	public String[] getGroups(String p, String world);
 	public String[] getGroups(Player p, String world);
 	
+	public void setPrefix(String p, String prefix, String w);
+	public void setPrefix(Player p, String prefix);
+	public void setPrefix(Player p, String prefix, String world);
+	
+	public String getPrefix(Player p);
+	public String getPrefix(String p, String world);
+	public String getPrefix(Player p, String world);
+	
+	public String getGroupPrefix(Player p);
+	public String getGroupPrefix(Player p, String world);
+	public String getGroupPrefix(String p, String g, String world);
+	
 	public boolean isEnabled();
 }
