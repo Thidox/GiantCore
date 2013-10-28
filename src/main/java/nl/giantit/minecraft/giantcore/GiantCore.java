@@ -22,7 +22,7 @@ import java.util.logging.Level;
 public class GiantCore extends JavaPlugin {
 	
 	private static GiantCore instance;
-	private final double protocolVersion = 0.2;
+	private final double protocolVersion = 0.3;
 	private final HashMap<PermHandler.Engines, HashMap<Boolean, PermHandler>> permHandler = new HashMap<PermHandler.Engines, HashMap<Boolean, PermHandler>>();
 	private final HashMap<Eco.Engines, Eco> ecoHandler = new HashMap<Eco.Engines, Eco>();
 	private final HashMap<Plugin, Database> dbList = new HashMap<Plugin, Database>();
