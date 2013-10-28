@@ -4,7 +4,7 @@
 
 	<groupId>nl.giantit.minecraft</groupId>
 	<artifactId>GiantCore</artifactId>
-	<version>1.0-GIT</version>
+	<version>0.2.DEV-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>GiantCore</name>
@@ -38,7 +38,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<name>GiantCore</name>
 		<package>giantcore</package>
-		<version>0.1.BETA</version>
+		<version>${project.version}</version>
 		<build>${buildNumber}</build>
 	</properties>
 	
