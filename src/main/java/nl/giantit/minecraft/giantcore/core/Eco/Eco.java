@@ -105,6 +105,7 @@ public class Eco {
 		this.plugin = plugin;
 		try {
 			this.Engine = (iEco)engine.getGameClass().getConstructor(GiantCore.class).newInstance(plugin);
+			this.engine = engine;
 		}catch(NoSuchMethodException ex) {
 			plugin.getLogger().log(Level.SEVERE, null, ex);
 		}catch(InstantiationException ex) {
