@@ -1,18 +1,18 @@
-package nl.giantit.minecraft.database.drivers.sqlite;
+package nl.giantit.minecraft.giantcore.database.drivers.mysql;
 
-import nl.giantit.minecraft.database.Driver;
-import nl.giantit.minecraft.database.DatabaseType;
-import nl.giantit.minecraft.database.QueryResult;
-import nl.giantit.minecraft.database.query.AlterQuery;
-import nl.giantit.minecraft.database.query.CreateQuery;
-import nl.giantit.minecraft.database.query.DeleteQuery;
-import nl.giantit.minecraft.database.query.DropQuery;
-import nl.giantit.minecraft.database.query.IndexQuery;
-import nl.giantit.minecraft.database.query.InsertQuery;
-import nl.giantit.minecraft.database.query.Query;
-import nl.giantit.minecraft.database.query.SelectQuery;
-import nl.giantit.minecraft.database.query.TruncateQuery;
-import nl.giantit.minecraft.database.query.UpdateQuery;
+import nl.giantit.minecraft.giantcore.database.Driver;
+import nl.giantit.minecraft.giantcore.database.DatabaseType;
+import nl.giantit.minecraft.giantcore.database.query.Query;
+import nl.giantit.minecraft.giantcore.database.QueryResult;
+import nl.giantit.minecraft.giantcore.database.query.AlterQuery;
+import nl.giantit.minecraft.giantcore.database.query.CreateQuery;
+import nl.giantit.minecraft.giantcore.database.query.DeleteQuery;
+import nl.giantit.minecraft.giantcore.database.query.DropQuery;
+import nl.giantit.minecraft.giantcore.database.query.IndexQuery;
+import nl.giantit.minecraft.giantcore.database.query.InsertQuery;
+import nl.giantit.minecraft.giantcore.database.query.SelectQuery;
+import nl.giantit.minecraft.giantcore.database.query.TruncateQuery;
+import nl.giantit.minecraft.giantcore.database.query.UpdateQuery;
 
 import org.bukkit.plugin.Plugin;
 
@@ -33,15 +33,15 @@ import java.util.logging.Level;
  *
  * @author Giant
  */
-public class SQLiteDriver implements Driver {
+public class MySQLDriver implements Driver {
 	
-	private final DatabaseType type = DatabaseType.SQLite;
+	private final DatabaseType type = DatabaseType.MySQL;
 	
 	private final Plugin plugin;
 	
 	private final ArrayList<HashMap<String, String>> sql = new ArrayList<HashMap<String, String>>();
 	
-	private final String db, user, pass, prefix;
+	private final String db, host, port, user, pass, prefix;
 	private Connection con = null;
 	private boolean dbg = false;
 	
@@ -52,36 +52,41 @@ public class SQLiteDriver implements Driver {
 		return d;
 	}
 	
-	public SQLiteDriver(Plugin p, HashMap<String, String> c) {
-		plugin = p;
-		
-		this.db = c.get("database");
-		this.prefix = c.get("prefix");
-		this.user = c.get("user");
-		this.pass = c.get("password");
-		this.dbg = (c.containsKey("debug")) ? this.parseBool(c.get("debug"), false) : false;
-
-		String dbPath = "jdbc:sqlite:" + plugin.getDataFolder() + java.io.File.separator + this.db + ".db";
+	private void connect() {
+		String dbPath = "jdbc:mysql://" + this.host + ":" + this.port + "/" + this.db + "?user=" + this.user + "&password=" + this.pass;
 		try{
-			Class.forName("org.sqlite.JDBC");
-			this.con = DriverManager.getConnection(dbPath, this.user, this.pass);
+			Class.forName("com.mysql.jdbc.Driver");
+			this.con = DriverManager.getConnection(dbPath);
 		}catch(SQLException e) {
 			plugin.getLogger().log(Level.SEVERE, "Failed to connect to database: SQL error!");
 			if(this.dbg) {
 				plugin.getLogger().log(Level.INFO, e.getMessage(), e);
 			}
 		}catch(ClassNotFoundException e) {
-			plugin.getLogger().log(Level.SEVERE, "Failed to connect to database: SQLite library not found!");
+			plugin.getLogger().log(Level.SEVERE, "Failed to connect to database: MySQL library not found!");
 			if(this.dbg) {
 				plugin.getLogger().log(Level.INFO, e.getMessage(), e);
 			}
 		}
 	}
 	
+	public MySQLDriver(Plugin p, HashMap<String, String> c) {
+		this.plugin = p;
+		
+		this.db = c.get("database");
+		this.host = c.get("host");
+		this.port = String.valueOf(c.get("port"));
+		this.user = c.get("user");
+		this.pass = c.get("password");
+		this.prefix = c.get("prefix");
+		this.dbg = (c.containsKey("debug")) ? this.parseBool(c.get("debug"), false) : false;
+		this.connect();
+	}
+	
 	@Override
 	public void close() {
 		try {
-			if(!con.isClosed() || !con.isValid(0))
+			if(null == con || !con.isClosed() || !con.isValid(0))
 				return;
 			
 			this.con.close();
@@ -93,7 +98,7 @@ public class SQLiteDriver implements Driver {
 	@Override
 	public boolean isConnected() {
 		try {
-			return con != null && !con.isClosed();
+			return con != null && !con.isClosed() && con.isValid(0);
 		}catch(SQLException e) {
 			return false;
 		}
@@ -103,14 +108,19 @@ public class SQLiteDriver implements Driver {
 	public boolean tableExists(String table) {
 		ResultSet res = null;
 		table = table.replace("#__", prefix);
-		
 		try {
 			DatabaseMetaData data = this.con.getMetaData();
 			res = data.getTables(null, null, table, null);
 
 			return res.next();
+		}catch (NullPointerException e) {
+			plugin.getLogger().log(Level.SEVERE, "Could not load table " + table);
+			if(this.dbg) {
+				plugin.getLogger().log(Level.INFO, e.getMessage(), e);
+			}
+            return false;
 		}catch (SQLException e) {
-			plugin.getLogger().log(Level.SEVERE, " Could not load table " + table);
+			plugin.getLogger().log(Level.SEVERE, "Could not load table " + table);
 			if(this.dbg) {
 				plugin.getLogger().log(Level.INFO, e.getMessage(), e);
 			}
@@ -121,7 +131,7 @@ public class SQLiteDriver implements Driver {
 					res.close();
 				}
 			}catch (Exception e) {
-				plugin.getLogger().log(Level.SEVERE, " Could not close result connection to database");
+				plugin.getLogger().log(Level.SEVERE, "Could not close result connection to database");
 				if(this.dbg) {
 					plugin.getLogger().log(Level.INFO, e.getMessage(), e);
 				}
@@ -208,66 +218,69 @@ public class SQLiteDriver implements Driver {
 	
 	@Override
 	public SelectQuery select(String f) {
-		SelectQuery sQ = new SQLiteSelectQuery(this);
+		SelectQuery sQ = new MySQLSelectQuery(this);
 		return sQ.select(f);
 	}
 	
 	@Override
 	public SelectQuery select(String... fields) {
-		SelectQuery sQ = new SQLiteSelectQuery(this);
+		SelectQuery sQ = new MySQLSelectQuery(this);
 		return sQ.select(fields);
 	}
 	
 	@Override
 	public SelectQuery select(List<String> fields) {
-		SelectQuery sQ = new SQLiteSelectQuery(this);
+		SelectQuery sQ = new MySQLSelectQuery(this);
 		return sQ.select(fields);
 	}
 	
 	@Override
 	public SelectQuery select(Map<String, String> fields) {
-		SelectQuery sQ = new SQLiteSelectQuery(this);
+		SelectQuery sQ = new MySQLSelectQuery(this);
 		return sQ.select(fields);
 	}
 	
 	@Override
 	public UpdateQuery update(String table) {
-		return new SQLiteUpdateQuery(this).setTable(table);
+		UpdateQuery uQ = new MySQLUpdateQuery(this);
+		uQ.setTable(table);
+		
+		return uQ;
 	}
 	
 	@Override
 	public InsertQuery insert(String table) {
-		return new SQLiteInsertQuery(this).into(table);
+		return new MySQLInsertQuery(this).into(table);
 	}
 	
 	@Override
 	public DeleteQuery delete(String table) {
-		return new SQLiteDeleteQuery(this).from(table);
+		return new MySQLDeleteQuery(this).from(table);
 	}
 	
 	@Override
 	public TruncateQuery Truncate(String table) {
-		return new SQLiteTruncateQuery(this).setTable(table);
+		return new MySQLTruncateQuery(this).setTable(table);
 	}
 	
 	@Override
 	public CreateQuery create(String table) {
-		return new SQLiteCreateQuery(this).create(table);
+		return new MySQLCreateQuery(this).create(table);
 	}
 	
 	@Override
 	public IndexQuery createIndex(String index) {
-		return new SQLiteIndexQuery(this).setName(index);
+		return new MySQLIndexQuery(this).setName(index);
 	}
 	
 	@Override
 	public AlterQuery alter(String table) {
-		return new SQLiteAlterQuery(this).setTable(table);
+		return new MySQLAlterQuery(this).setTable(table);
 	}
 	
 	@Override
 	public DropQuery drop(String table) {
-		return new SQLiteDropQuery(this).setTable(table);
+		return new MySQLDropQuery(this).setTable(table);
 	}
 	
 	@Override
@@ -284,23 +297,23 @@ public class SQLiteDriver implements Driver {
 	public Query create(Type t) {
 		switch(t) {
 			case SELECT:
-				return new SQLiteSelectQuery(this);
+				return new MySQLSelectQuery(this);
 			case UPDATE:
-				return new SQLiteUpdateQuery(this);
+				return new MySQLUpdateQuery(this);
 			case INSERT:
-				return new SQLiteInsertQuery(this);
+				return new MySQLInsertQuery(this);
 			case DELETE:
-				return new SQLiteDeleteQuery(this);
+				return new MySQLDeleteQuery(this);
 			case TRUNCATE:
-				return new SQLiteTruncateQuery(this);
+				return new MySQLTruncateQuery(this);
 			case CREATE:
-				return new SQLiteCreateQuery(this);
+				return new MySQLCreateQuery(this);
 			case INDEX:
-				return new SQLiteIndexQuery(this);
+				return new MySQLIndexQuery(this);
 			case ALTER:
-				return new SQLiteAlterQuery(this);
+				return new MySQLAlterQuery(this);
 			case DROP:
-				return new SQLiteDropQuery(this);
+				return new MySQLDropQuery(this);
 		}
 		
 		return null;

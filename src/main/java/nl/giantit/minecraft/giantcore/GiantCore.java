@@ -1,6 +1,6 @@
 package nl.giantit.minecraft.giantcore;
 
-import nl.giantit.minecraft.database.Database;
+import nl.giantit.minecraft.giantcore.database.Database;
 import nl.giantit.minecraft.giantcore.core.Eco.Eco;
 import nl.giantit.minecraft.giantcore.core.Items.Items;
 import nl.giantit.minecraft.giantcore.perms.PermHandler;
