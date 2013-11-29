@@ -109,6 +109,26 @@ public class pexEngine implements Permission {
 	}
 
 	@Override
+	public void setGroup(String p, String group) {
+		plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "pex user " + p + " group set " + group);
+	}
+
+	@Override
+	public void setGroup(Player p, String group) {
+		this.setGroup(p.getName(), group);
+	}
+
+	@Override
+	public void setGroup(String p, String group, String world) {
+		plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "pex user " + p + " group set " + group + " " + world);
+	}
+
+	@Override
+	public void setGroup(Player p, String group, String world) {
+		this.setGroup(p.getName(), group, world);
+	}
+
+	@Override
 	public String getGroup(String p) {
 		String[] groups = PermissionsEx.getPermissionManager().getUser(p).getGroupsNames();
 		if(groups.length > 0)

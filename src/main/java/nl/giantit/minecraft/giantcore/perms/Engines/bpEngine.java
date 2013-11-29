@@ -103,6 +103,29 @@ public class bpEngine implements Permission {
 	}
 
 	@Override
+	public void setGroup(String p, String group) {
+		Player pl = plugin.getServer().getPlayer(p);
+		if(pl != null) {
+			this.setGroup(pl, group);
+		}
+	}
+
+	@Override
+	public void setGroup(Player p, String group) {
+		this.setGroup(p, group, p.getWorld().getName());
+	}
+
+	@Override
+	public void setGroup(String p, String group, String world) {
+		ApiLayer.addGroup(world, CalculableType.USER, p, group);
+	}
+
+	@Override
+	public void setGroup(Player p, String group, String world) {
+		this.setGroup(p.getName(), group, world);
+	}
+
+	@Override
 	public String getGroup(String p) {
 		Player pl = plugin.getServer().getPlayer(p);
 		if(pl == null)

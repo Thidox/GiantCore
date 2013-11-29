@@ -21,6 +21,11 @@ public interface Permission {
 	public String getGroup(Player p);
 	public String getGroup(String p, String world);
 	public String getGroup(Player p, String world);
+	
+	public void setGroup(String p, String group);
+	public void setGroup(Player p, String group);
+	public void setGroup(String p, String group, String world);
+	public void setGroup(Player p, String group, String world);
 
 	public String[] getGroups(String p);
 	public String[] getGroups(Player p);

@@ -145,6 +145,22 @@ public class gmEngine implements Permission {
 	}
 
 	@Override
+	public void setGroup(String p, String group) {
+	}
+
+	@Override
+	public void setGroup(Player p, String group) {
+	}
+
+	@Override
+	public void setGroup(String p, String group, String world) {
+	}
+
+	@Override
+	public void setGroup(Player p, String group, String world) {
+	}
+
+	@Override
 	public String getGroup(String p) {
 		AnjoPermissionsHandler h = permission.getWorldsHolder().getWorldPermissionsByPlayerName(p);
 		if(h != null) {

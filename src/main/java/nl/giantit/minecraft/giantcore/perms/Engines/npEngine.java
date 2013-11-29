@@ -90,6 +90,22 @@ public class npEngine implements Permission {
 	}
 
 	@Override
+	public void setGroup(String p, String group) {
+	}
+
+	@Override
+	public void setGroup(Player p, String group) {
+	}
+
+	@Override
+	public void setGroup(String p, String group, String world) {
+	}
+
+	@Override
+	public void setGroup(Player p, String group, String world) {
+	}
+
+	@Override
 	public String getGroup(String p) {
 		return null;
 	}

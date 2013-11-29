@@ -122,6 +122,26 @@ public class zpEngine implements Permission {
 	}
 
 	@Override
+	public void setGroup(String p, String group) {
+		plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "permissions group " + group + " add " + p);
+	}
+
+	@Override
+	public void setGroup(Player p, String group) {
+		this.setGroup(p.getName(), group);
+	}
+
+	@Override
+	public void setGroup(String p, String group, String world) {
+		this.setGroup(p, group);
+	}
+
+	@Override
+	public void setGroup(Player p, String group, String world) {
+		this.setGroup(p.getName(), group, world);
+	}
+
+	@Override
 	public String getGroup(String p) {
 		List<String> groups = permission.getPlayerAssignedGroups(p);
 		return (!groups.isEmpty()) ? groups.get(0) : null;
