@@ -193,17 +193,20 @@ public class MySQLSelectQuery implements SelectQuery {
 			sB.append("SELECT ");
 			if(this.s.size() > 0) {
 				int i = 0;
-				for(Map.Entry<String, String> field : this.s.entrySet()) {
+				for(Map.Entry<String, String> entry : this.s.entrySet()) {
 					if(i > 0) {
 						sB.append(", ");
 					}else{
 						++i;
 					}
 
-					sB.append(field.getKey().replace("#__", this.db.getPrefix()));
-					sB.append(" AS ");
-					sB.append(field.getValue().replace("#__", this.db.getPrefix()));
-					i++;
+					if(!entry.getKey().equals("*")) {
+						sB.append(entry.getKey().replace("#__", this.db.getPrefix()));
+						sB.append(" AS ");
+						sB.append(entry.getValue().replace("#__", this.db.getPrefix()));
+					}else{
+						sB.append(entry.getKey());
+					}
 				}
 
 			}else{

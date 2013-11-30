@@ -197,9 +197,13 @@ public class H2SelectQuery implements SelectQuery {
 					++i;
 				}
 				
-				sB.append(entry.getKey().replace("#__", this.db.getPrefix()));
-				sB.append(" AS ");
-				sB.append(entry.getValue().replace("#__", this.db.getPrefix()));
+				if(!entry.getKey().equals("*")) {
+					sB.append(entry.getKey().replace("#__", this.db.getPrefix()));
+					sB.append(" AS ");
+					sB.append(entry.getValue().replace("#__", this.db.getPrefix()));
+				}else{
+					sB.append(entry.getKey());
+				}
 			}
 			
 			sB.append("\n");
