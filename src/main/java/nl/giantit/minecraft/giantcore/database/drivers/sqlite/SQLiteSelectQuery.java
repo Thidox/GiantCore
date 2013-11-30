@@ -197,13 +197,9 @@ public class SQLiteSelectQuery implements SelectQuery {
 					++i;
 				}
 				
-				if(!entry.getKey().equals("*")) {
-					sB.append(entry.getKey().replace("#__", this.db.getPrefix()));
-					sB.append(" AS ");
-					sB.append(entry.getValue().replace("#__", this.db.getPrefix()));
-				}else{
-					sB.append(entry.getKey());
-				}
+				sB.append(entry.getKey().replace("#__", this.db.getPrefix()));
+				sB.append(" AS ");
+				sB.append(entry.getValue().replace("#__", this.db.getPrefix()));
 			}
 			
 			sB.append("\n");
