@@ -112,36 +112,34 @@
 						<configuration>
 							<artifactSet>
 								<includes>
-									<!--
 									<include>nl.giantit.minecraft:dbDriver</include>
-									-->
 									<include>com.google.code.gson:gson</include>
 								</includes>
 							</artifactSet>
-							<!--
 							<filters>
 								<filter>
 									<artifact>nl.giantit.minecraft:dbDriver</artifact>
 									<excludes>
-										<exclude>nl/giantit/minecraft/database/Database*.class</exclude>
-										<exclude>nl/giantit/minecraft/database/drivers/h2/H2Driver*.class</exclude>
-										<exclude>nl/giantit/minecraft/database/drivers/mysql/MySQLDriver*.class</exclude>
-										<exclude>nl/giantit/minecraft/database/drivers/sqlite/SQLiteDriver*.class</exclude>
+										<exclude>nl/giantit/minecraft/database/Database.class</exclude>
+										<exclude>nl/giantit/minecraft/database/Database$dbType.class</exclude>
+										<exclude>nl/giantit/minecraft/database/drivers/h2/H2Driver.class</exclude>
+										<exclude>nl/giantit/minecraft/database/drivers/h2/H2Driver$1.class</exclude>
+										<exclude>nl/giantit/minecraft/database/drivers/mysql/MySQLDriver.class</exclude>
+										<exclude>nl/giantit/minecraft/database/drivers/mysql/MySQLDriver$1.class</exclude>
+										<exclude>nl/giantit/minecraft/database/drivers/sqlite/SQLiteDriver.class</exclude>
+										<exclude>nl/giantit/minecraft/database/drivers/sqlite/SQLiteDriver$1.class</exclude>
 									</excludes>
 								</filter>
 							</filters>
-							-->
 							<relocations>
 								<relocation>
 									<pattern>com.google.gson</pattern>
 									<shadedPattern>nl.giantit.minecraft.giantcore.lib.gson</shadedPattern>
 								</relocation>
-								<!--
 								<relocation>
 									<pattern>nl.giantit.minecraft.database</pattern>
 									<shadedPattern>nl.giantit.minecraft.giantcore.database</shadedPattern>
 								</relocation>
-								-->
 							</relocations>
 						</configuration>
 					</execution>
@@ -222,13 +220,11 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		<!--
 		<dependency>
 			<groupId>nl.giantit.minecraft</groupId>
 			<artifactId>dbDriver</artifactId>
-			<version>1.3</version>
+			<version>1.3.2</version>
 		</dependency>
-		-->
 		<!-- /GENERAL -->
 
 		<!-- PERM -->

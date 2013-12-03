@@ -1,18 +1,19 @@
-package nl.giantit.minecraft.giantcore.database.drivers.h2;
+package nl.giantit.minecraft.database.drivers.h2;
 
-import nl.giantit.minecraft.giantcore.database.DatabaseType;
-import nl.giantit.minecraft.giantcore.database.Driver;
-import nl.giantit.minecraft.giantcore.database.QueryResult;
-import nl.giantit.minecraft.giantcore.database.query.AlterQuery;
-import nl.giantit.minecraft.giantcore.database.query.CreateQuery;
-import nl.giantit.minecraft.giantcore.database.query.DeleteQuery;
-import nl.giantit.minecraft.giantcore.database.query.DropQuery;
-import nl.giantit.minecraft.giantcore.database.query.IndexQuery;
-import nl.giantit.minecraft.giantcore.database.query.InsertQuery;
-import nl.giantit.minecraft.giantcore.database.query.Query;
-import nl.giantit.minecraft.giantcore.database.query.SelectQuery;
-import nl.giantit.minecraft.giantcore.database.query.TruncateQuery;
-import nl.giantit.minecraft.giantcore.database.query.UpdateQuery;
+import nl.giantit.minecraft.database.DatabaseType;
+
+import nl.giantit.minecraft.database.Driver;
+import nl.giantit.minecraft.database.QueryResult;
+import nl.giantit.minecraft.database.query.AlterQuery;
+import nl.giantit.minecraft.database.query.CreateQuery;
+import nl.giantit.minecraft.database.query.DeleteQuery;
+import nl.giantit.minecraft.database.query.DropQuery;
+import nl.giantit.minecraft.database.query.IndexQuery;
+import nl.giantit.minecraft.database.query.InsertQuery;
+import nl.giantit.minecraft.database.query.Query;
+import nl.giantit.minecraft.database.query.SelectQuery;
+import nl.giantit.minecraft.database.query.TruncateQuery;
+import nl.giantit.minecraft.database.query.UpdateQuery;
 
 import org.bukkit.plugin.Plugin;
 
@@ -204,12 +205,6 @@ public class H2Driver implements Driver {
 		}
 		
 		return QueryResult.QR();
-	}
-	
-	@Override
-	public SelectQuery select(String f) {
-		SelectQuery sQ = new H2SelectQuery(this);
-		return sQ.select(f);
 	}
 	
 	@Override
