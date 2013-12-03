@@ -33,7 +33,7 @@ public class Messages {
 		
 		Set<String> list = config.getConfigurationSection("main").getKeys(false);
 		if(list == null) {
-			this.plugin.getLogger().log(Level.WARNING, "[" + plugin.getName() + "] There are no main messages specified in the msgTemplates.yml file. This might cause errors!");
+			this.plugin.getLogger().log(Level.WARNING, "There are no main messages specified in the msgTemplates.yml file. This might cause errors!");
 			return;
 		}
 		
@@ -48,7 +48,7 @@ public class Messages {
 		
 		Set<String> list = config.getConfigurationSection("admin").getKeys(false);
 		if(list == null) {
-			this.plugin.getLogger().log(Level.WARNING, "[" + plugin.getName() + "] There are no admin messages specified in the msgTemplates.yml file. This might cause errors!");
+			this.plugin.getLogger().log(Level.WARNING, "There are no admin messages specified in the msgTemplates.yml file. This might cause errors!");
 			return;
 		}
 		
@@ -63,7 +63,7 @@ public class Messages {
 		
 		Set<String> list = config.getConfigurationSection("errors").getKeys(false);
 		if(list == null) {
-			this.plugin.getLogger().log(Level.WARNING, "[" + plugin.getName() + "] There are no error messages specified in the msgTemplates.yml file. This might cause errors!");
+			this.plugin.getLogger().log(Level.WARNING, "There are no error messages specified in the msgTemplates.yml file. This might cause errors!");
 			return;
 		}
 		
@@ -79,14 +79,14 @@ public class Messages {
 		
 		File configFile = new File(plugin.getDir(), "msgTemplate.yml");
 		if(!configFile.exists()) {
-			this.plugin.getLogger().log(Level.INFO, "[" + plugin.getName() + "] Extracting new msgTemplate.yml file...");
+			this.plugin.getLogger().log(Level.INFO, "Extracting new msgTemplate.yml file...");
 			plugin.extract("msgTemplate.yml");
 		}
 		
 		config = YamlConfiguration.loadConfiguration(configFile);
 		double v = config.getDouble("version");
 		if(v < this.yamlVersion) {
-			this.plugin.getLogger().log(Level.INFO, "[" + plugin.getName() + "] Your msgTemplate.yml has ran out of date. Updating now!");
+			this.plugin.getLogger().log(Level.INFO, "Your msgTemplate.yml has ran out of date. Updating now!");
 			File oconfigFile = new File(plugin.getDir(), "msgTemplate.yml." + v + ".bak");
 			configFile.renameTo(oconfigFile);
 			plugin.extract("msgTemplate.yml");
@@ -101,14 +101,14 @@ public class Messages {
 	public void reload() {
 		File configFile = new File(plugin.getDir(), "msgTemplate.yml");
 		if(!configFile.exists()) {
-			this.plugin.getLogger().log(Level.INFO, "[" + plugin.getName() + "] Extracting new msgTemplate.yml file...");
+			this.plugin.getLogger().log(Level.INFO, "Extracting new msgTemplate.yml file...");
 			plugin.extract("msgTemplate.yml");
 		}
 		
 		config = YamlConfiguration.loadConfiguration(configFile);
 		double v = config.getDouble("version");
 		if(v < this.yamlVersion) {
-			this.plugin.getLogger().log(Level.INFO, "[" + plugin.getName() + "] Your msgTemplate.yml has ran out of date. Updating now!");
+			this.plugin.getLogger().log(Level.INFO, "Your msgTemplate.yml has ran out of date. Updating now!");
 			File oconfigFile = new File(plugin.getDir(), "msgTemplate.yml." + v + ".bak");
 			configFile.renameTo(oconfigFile);
 			plugin.extract("msgTemplate.yml");
@@ -149,7 +149,7 @@ public class Messages {
 				if(entry.getKey() != null && entry.getValue() != null) {
 					Template = Template.replace("%" + entry.getKey(), entry.getValue());
 				}else{
-					this.plugin.getLogger().log(Level.SEVERE, "[" + plugin.getName() + "] Message template engine received invalid parameter! (null)");
+					this.plugin.getLogger().log(Level.SEVERE, "Message template engine received invalid parameter! (null)");
 				}
 			}
 			Template = Template.replace("%n", plugin.getPubName());
@@ -160,7 +160,7 @@ public class Messages {
 			return Template;
 		}
 		
-		this.plugin.getLogger().log(Level.SEVERE, "[" + plugin.getName() + "] Template for " + template + " does not exist!");
+		this.plugin.getLogger().log(Level.SEVERE, "Template for " + template + " does not exist!");
 		return "&cRequested template does not exist!";
 	}
 	
@@ -193,7 +193,7 @@ public class Messages {
 				if(entry.getKey() != null && entry.getValue() != null) {
 					Template = Template.replace("%" + entry.getKey(), entry.getValue());
 				}else{
-					this.plugin.getLogger().log(Level.SEVERE, "[" + plugin.getName() + "] Message template engine received invalid parameter! (null)");
+					this.plugin.getLogger().log(Level.SEVERE, "Message template engine received invalid parameter! (null)");
 				}
 			}
 			Template = Template.replace("%n", plugin.getPubName());
@@ -204,7 +204,7 @@ public class Messages {
 			return Template;
 		}
 		
-		this.plugin.getLogger().log(Level.SEVERE, "[" + plugin.getName() + "] Template for " + template + " does not exist!");
+		this.plugin.getLogger().log(Level.SEVERE, "Template for " + template + " does not exist!");
 		return "Requested template does not exist!";
 	}
 	
