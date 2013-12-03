@@ -205,7 +205,7 @@ public class Messages {
 		}
 		
 		this.plugin.getLogger().log(Level.SEVERE, "[" + plugin.getName() + "] Template for " + template + " does not exist!");
-		return "&cRequested template does not exist!";
+		return "Requested template does not exist!";
 	}
 	
 	public static String colourfy(String template) {
