@@ -119,6 +119,13 @@ public class Misc {
 		return Math.round(r * p) / p;
 	}
 	
+	/**
+	 * 
+	 * Attempt to get a player.
+	 * 
+	 * @param name Partial name of player
+	 * @return null if player not found, else OfflinePlayer
+	 */
 	public static OfflinePlayer getPlayer(String name) {
 		if(players.containsKey(name))
 			return players.get(name);
