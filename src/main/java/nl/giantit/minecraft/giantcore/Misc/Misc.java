@@ -75,6 +75,32 @@ public class Misc {
 		return false;
 	}
 	
+	public static int startsWithAny(String needle, String... haystack) {
+		int i = -1;
+		for(String straw : haystack) {
+			++i;
+			
+			if(needle.startsWith(straw)) {
+				break;
+			}
+		}
+		
+		return i;
+	}
+	
+	public static int startsWithAnyIgnoreCase(String needle, String... haystack) {
+		int i = -1;
+		for(String straw : haystack) {
+			++i;
+			
+			if(needle.toLowerCase().startsWith(straw.toLowerCase())) {
+				break;
+			}
+		}
+		
+		return i;
+	}
+	
 	public static Boolean contains(List<String> haystack, String needle) {
 		for(String hay : haystack) {
 			hay = hay.replace("[", "");
