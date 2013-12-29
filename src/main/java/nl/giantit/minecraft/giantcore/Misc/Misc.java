@@ -77,26 +77,36 @@ public class Misc {
 	
 	public static int startsWithAny(String needle, String... haystack) {
 		int i = -1;
+		boolean matchFound = false;
 		for(String straw : haystack) {
 			++i;
 			
 			if(needle.startsWith(straw)) {
+				matchFound = true;
 				break;
 			}
 		}
+		
+		if(!matchFound)
+			i = -1;
 		
 		return i;
 	}
 	
 	public static int startsWithAnyIgnoreCase(String needle, String... haystack) {
 		int i = -1;
+		boolean matchFound = false;
 		for(String straw : haystack) {
 			++i;
 			
 			if(needle.toLowerCase().startsWith(straw.toLowerCase())) {
+				matchFound = true;
 				break;
 			}
 		}
+		
+		if(!matchFound)
+			i = -1;
 		
 		return i;
 	}
