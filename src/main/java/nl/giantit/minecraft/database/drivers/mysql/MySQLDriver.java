@@ -142,6 +142,10 @@ public class MySQLDriver implements Driver {
 	
 	@Override
 	public QueryResult execQuery(Query q) {
+		if(!this.isConnected()) {
+			this.connect();
+		}
+		
 		Statement st = null;
 		
 		ArrayList<HashMap<String, String>> data = new ArrayList<HashMap<String, String>>();
@@ -186,6 +190,10 @@ public class MySQLDriver implements Driver {
 	
 	@Override
 	public QueryResult updateQuery(Query q) {
+		if(!this.isConnected()) {
+			this.connect();
+		}
+		
 		Statement st = null;
 		
 		if(!q.isParsed()) {
