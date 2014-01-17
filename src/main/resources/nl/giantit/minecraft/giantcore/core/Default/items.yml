@@ -282,8 +282,13 @@ names:
     item140: Flower Pot Block
     item143: Wooden Button
     item145: Anvil
-    item147: Weighted Pressure Plate (Light)
-    item147: Weighted Pressure Plate (Heavy)
+    item146: Trapped Chest
+    item147: 
+    - Weighted Pressure Plate (Light)
+    - Gold Pressure Plate
+    item148: 
+    - Weighted Pressure Plate (Heavy)
+    - Iron Pressure Plate
     item151: Daylight Sensor
     item152: Block of Redstone
     item153: Nether Quartz Ore
@@ -883,6 +888,12 @@ types:
         type3:
         - Jungle Wood Double Slabs
         - Jungle Wooden Double Slabs
+        type4:
+        - Acacia Wood Double Slabs
+        - Acacia Wooden Double Slabs
+        type5:
+        - Dark Oak Wood Double Slabs
+        - Dark Oak Wooden Double Slabs
     item126:
         type0:
         - Wood Slabs
@@ -898,6 +909,17 @@ types:
         type3:
         - Jungle Wood Slabs
         - Jungle Wooden Slabs
+        type4:
+        - Acacia Wood Slabs
+        - Acacia Wooden Slabs
+        type5:
+        - Dark Oak Wood Slabs
+        - Dark Oak Wooden Slabs
+    item139: 
+        type0:
+        - Cobblestone Wall
+        type1:
+        - Mossy Cobblestone Wall
     item155:
         type0:
         - Block of Quartz
@@ -1021,9 +1043,9 @@ types:
         - Dark Oak Leaves
     item162:
         type0:
-        - Acacia Jungle Log
+        - Acacia Log
         type1:
-        - Dark Oak Jungle Log
+        - Dark Oak Log
     item171:
         type0:
         - White Carpet
@@ -1091,6 +1113,11 @@ types:
         - Rose Bush
         type5:
         - Peony
+    item263:
+        type0:
+        - Coal
+        type1:
+        - Charcoal
     item322:
         type0:
         - Golden Apple
@@ -1102,11 +1129,6 @@ types:
         - Enchanted Gold Apple
         - Enchanted Golden Fruit
         - Enchanted Gold Fruit
-    item263:
-        type0:
-        - Coal
-        type1:
-        - Charcoal
     item349:
         type0:
         - Fish
